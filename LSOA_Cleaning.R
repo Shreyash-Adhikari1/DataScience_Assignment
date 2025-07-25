@@ -5,7 +5,7 @@ library(dplyr)
 
 Cleaned_HP = read.csv("C:\\Users\\ADMIN\\Desktop\\Data Science Assignment\\Cleaned Data\\Cleaned_Town_Population.csv" )
 
-LSOA = fread("Datasets/Postcode to LSOA.csv")
+LSOA = fread("C:\\Users\\ADMIN\\Desktop\\Data Science Assignment\\Obtained Data\\Postcode to LSOA.csv")
 pattern = ' .*$'
 LSOA_Cleaned = LSOA %>%
   select(lsoa11cd,pcds) %>% 
@@ -20,4 +20,4 @@ LSOA_Cleaned
 
 colnames(LSOA_Cleaned)[1] <- "LSOA code"
 view(LSOA_Cleaned)
-write.csv(LSOA_Cleaned,"Cleaning/Cleaned Datasets/Cleaned_LSOA.csv",row.names = FALSE,col.names = FALSE)
+write.csv(LSOA_Cleaned,"C:\\Users\\ADMIN\\Desktop\\Data Science Assignment\\Cleaned Data\\Cleaned_LSOA.csv",row.names = FALSE,col.names = FALSE)
