@@ -1,10 +1,11 @@
 library(tidyverse)
 
+#Reading Unclean Broadband Data from where it is stored
 UncleanBroadbandData = read_csv("C://Users//ADMIN//Desktop//Data Science Assignment//Obtained Data//broadband-speed//201805_fixed_pc_performance_r03.csv",show_col_types = FALSE)
 View(UncleanBroadbandData)
 
 # Create shortPostcode from postcode_space and select key columns
-CleanBroadbandData <- UncleanBroadbandData %>%
+CleanBroadbandData = UncleanBroadbandData %>%
   mutate(
     shortPostcode = str_trim(substr(postcode_space, 1, 4)),
     ID = row_number()
