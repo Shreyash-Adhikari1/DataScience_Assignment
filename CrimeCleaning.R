@@ -50,4 +50,5 @@ write_csv(CleanedCrimeData, "C:\\Users\\ADMIN\\Desktop\\Data Science Assignment\
 
 
 View(CleanedCrimeData)
+colnames(CleanedCrimeData)
 

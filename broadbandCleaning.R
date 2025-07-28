@@ -35,6 +35,7 @@ BroadbandData = Broadband %>%
 write_csv(BroadbandData, "C:\\Users\\ADMIN\\Desktop\\Data Science Assignment\\Cleaned Data\\Cleaned_Broadband_Data.csv"
 )
 View(BroadbandData)
+colnames(BroadbandData)
 
 
 BroadbandData
