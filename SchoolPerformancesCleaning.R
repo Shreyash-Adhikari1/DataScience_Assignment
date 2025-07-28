@@ -61,6 +61,7 @@ if (nrow(combined_ks4final) > 0) {
   message("No data found for South or West Yorkshire after filtering and join.")
 }
 
+colnames(combined_ks4final)
 
 write_csv(combined_ks4final,"C:\\Users\\ADMIN\\Desktop\\Data Science Assignment\\Cleaned Data\\Cleaned_School_Performance.csv"
 )

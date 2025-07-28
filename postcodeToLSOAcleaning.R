@@ -20,5 +20,5 @@ LSOA_Cleaned = LSOA %>%
 colnames(LSOA_Cleaned)[1] = "LSOA_code"
 
 View(LSOA_Cleaned)
-
+colnames(LSOA_Cleaned)
 write.csv(LSOA_Cleaned, "C:\\Users\\ADMIN\\Desktop\\Data Science Assignment\\Cleaned Data\\Cleaned_LSOA.csv", row.names = FALSE)
