@@ -223,7 +223,7 @@ print(paste("Number of districts:", n_distinct(vehicle_crimes$District)))
 max_rate = max(vehicle_crimes$VehicleCrimeRate, na.rm = TRUE)
 min_rate = 0
 
-radar_data <- vehicle_crimes %>%
+radar_data = vehicle_crimes %>%
   select(District, VehicleCrimeRate) %>%
   column_to_rownames("District") %>%
   t() %>%
@@ -255,7 +255,7 @@ fmsb::radarchart(
 )
 
 
- #------------------------ Pie Chart for Robbery Rate ---------------------------------#
+#------------------------ Pie Chart for Robbery Rate ---------------------------------#
 
 # Parameters
 chosen_county = "WEST YORKSHIRE"
