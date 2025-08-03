@@ -59,7 +59,7 @@ summary(lm_model)
 
 # Calculate and print overall Pearson correlation coefficient between house price and drug offense rate
 overall_cor = cor(merged_data$AvgHousePrice, merged_data$DrugOffenseRate, use = "complete.obs")
-cat("Overall Correlation Coefficient:", round(overall_cor, 3), "\n")
+cat("Correlation Between Variables (Overall):", round(overall_cor, 3), "\n")
 
 # Calculate and print correlation coefficient grouped by County
 county_correlations = merged_data %>%

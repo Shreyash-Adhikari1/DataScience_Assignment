@@ -34,10 +34,10 @@ ggplot(house_pricesXatt8_no_outliers, aes(x = ATT8SCR, y = Price, color = County
   scale_y_log10() +  # Log scale helps visualize wide price ranges
   geom_smooth(method = "lm", se = TRUE) +
   labs(
-    title = "Attainment 8 Score vs House Price (Both Counties, No Outliers)",
+    title = "Average Attainment 8 Scores vs Average Property Prices (Clean Sample)",
     x = "Average Attainment 8 Score",
-    y = "Average House Price"
-  ) +
+    y = "Average House Price (£)"
+  )+
   theme_minimal()
 
 # Linear model: log-transformed house price ~ ATT8 score
@@ -46,14 +46,14 @@ summary(model_linear)
 
 # Overall correlation between ATT8 score and house price
 cor_overall = cor(house_pricesXatt8_no_outliers$ATT8SCR, house_pricesXatt8_no_outliers$Price, use = "complete.obs")
-print(paste("Overall Correlation:", cor_overall))
+print(paste("Correlation Between Variables (Overall):", cor_overall))
 
 # Correlation split by county
-cor_south = cor(filter(house_pricesXatt8_no_outliers, County == "SOUTH YORKSHIRE")$ATT8SCR, 
+correlation_for_south = cor(filter(house_pricesXatt8_no_outliers, County == "SOUTH YORKSHIRE")$ATT8SCR, 
                 filter(house_pricesXatt8_no_outliers, County == "SOUTH YORKSHIRE")$Price, 
                 use = "complete.obs")
-cor_west = cor(filter(house_pricesXatt8_no_outliers, County == "WEST YORKSHIRE")$ATT8SCR, 
+correlation_for_west = cor(filter(house_pricesXatt8_no_outliers, County == "WEST YORKSHIRE")$ATT8SCR, 
                filter(house_pricesXatt8_no_outliers, County == "WEST YORKSHIRE")$Price, 
                use = "complete.obs")
-print(paste("South Yorkshire Correlation:", cor_south))
-print(paste("West Yorkshire Correlation:", cor_west))
+print(paste("Correlation Coefficient for South Yorkshire:", correlation_for_south))
+print(paste("Correlation Coefficient for West Yorkshire::", correlation_for_west))

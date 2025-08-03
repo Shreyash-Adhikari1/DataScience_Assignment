@@ -46,6 +46,7 @@ ggplot(merged_data, aes(x = ATT8SCR, y = DrugOffenseRate, color = County)) +
     y = "Attainment 8 Score",
     color = "County"
   ) +
+  coord_flip()+
   theme_minimal()
 
 # Linear regression model including interaction between drug offense rate and county
@@ -54,7 +55,7 @@ summary(lm_model_by_county)
 
 # Calculate and display overall correlation coefficient
 overall_cor = cor(merged_data$ATT8SCR, merged_data$DrugOffenseRate, use = "complete.obs")
-cat("Overall Correlation Coefficient:", round(overall_cor, 3), "\n")
+cat("Correlation Between Variables (Overall):", round(overall_cor, 3), "\n")
 
 # Compute correlation coefficients separately for each county
 county_correlations = merged_data %>%
