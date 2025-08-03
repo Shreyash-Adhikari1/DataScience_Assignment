@@ -1,12 +1,17 @@
 library(tidyverse)
 
-Broadband = read_csv( "C:\\Users\\ADMIN\\Desktop\\Data Science Assignment\\Obtained Data\\broadband-speed\\201805_fixed_pc_performance_r03.csv",show_col_types = FALSE)
-
-HousePrices = read_csv("C:\\Users\\ADMIN\\Desktop\\Data Science Assignment\\Cleaned Data\\CleanedHousePrices.csv")
+Broadband = read_csv(
+  "C:\\Users\\ADMIN\\Desktop\\Data Science Assignment\\Obtained Data\\broadband-speed\\201805_fixed_pc_performance_r03.csv",
+  show_col_types = FALSE
+)
+View(Broadband)
+HousePrices = read_csv(
+  "C:\\Users\\ADMIN\\Desktop\\Data Science Assignment\\Cleaned Data\\CleanedHousePrices.csv"
+)
 
 colnames(HousePrices)
-postcode_map = HousePrices %>%
-  mutate(shortPostcode = substr(Postcode, 1, 4)) %>%
+postcode_map <- HousePrices %>%
+  mutate(shortPostcode = str_to_upper(str_trim(gsub(" .*$", "", Postcode)))) %>%
   count(shortPostcode, Town, District, County, name = "n") %>%
   group_by(shortPostcode) %>%
   slice_max(order_by = n, n = 1, with_ties = FALSE) %>%
@@ -15,7 +20,8 @@ postcode_map = HousePrices %>%
 
 BroadbandData = Broadband %>%
   mutate(
-    shortPostcode = str_trim(substr(postcode_space, 1, 4)),
+    # shortPostcode = str_trim(substr(`postcode_space`, 1, 4)),
+    shortPostcode = str_to_upper(str_trim(gsub(" .*$", "", postcode_space))),
     ID = row_number()
   ) %>%
   select(
@@ -32,10 +38,8 @@ BroadbandData = Broadband %>%
   left_join(postcode_map, by = "shortPostcode") %>%
   filter(!is.na(District), !is.na(County))
 
-write_csv(BroadbandData, "C:\\Users\\ADMIN\\Desktop\\Data Science Assignment\\Cleaned Data\\Cleaned_Broadband_Data.csv"
+write_csv(BroadbandData, "C:\\Users\\ADMIN\\Desktop\\Data Science Assignment\\Cleaned Data\\cleaned_broadband_data.csv"
 )
 View(BroadbandData)
+
 colnames(BroadbandData)
-
-
-BroadbandData

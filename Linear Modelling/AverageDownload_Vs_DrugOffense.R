@@ -7,7 +7,7 @@ crime_data = read_csv("C:\\Users\\ADMIN\\Desktop\\Data Science Assignment\\Clean
 lsoa_lookup = read_csv("C:\\Users\\ADMIN\\Desktop\\Data Science Assignment\\Cleaned Data\\Cleaned_LSOA.csv", show_col_types = FALSE)
 
 # 2. Map crime data to postcode districts
-crime_postcode <- crime_data %>%
+crime_postcode = crime_data %>%
   left_join(lsoa_lookup %>% select(LSOA_code, shortPostcode), by = "LSOA_code") %>%
   filter(!is.na(shortPostcode))
 
