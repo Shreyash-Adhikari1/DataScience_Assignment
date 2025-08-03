@@ -52,6 +52,7 @@ ggplot(SouthYorkshire, aes(x = reorder(Town, avgDownload), y = avgDownload)) +
     x = "Town (ordered by download speed)",
     y = "Average Download Speed (Mbps)"
   ) +
+  coord_flip()+
   scale_y_continuous(labels = comma) +
   theme_minimal(base_size = 13) +
   theme(axis.text.y = element_text(size = 10))

@@ -57,16 +57,16 @@ ggplot(west_yorkshire, aes(x = District, y = DrugOffenseRate)) +
 #------------------------------ Radar Chart for vehicle crime rate in South Yorkshire-2024-06 -----------------------------#
 
 # Define the county, year, and month to filter
-chosen_county = "SOUTH YORKSHIRE"
-chosen_year = "2024"
-chosen_month = "06"
+county_taken_SY = "SOUTH YORKSHIRE"
+year_taken_SY = "2024"
+month_taken_SY = "06"
 
 # Filter vehicle crime for selected month and county, and calculate rate per district
 vehicle_crimes = crime_data %>%
   filter(CrimeType %in% c("Vehicle crime")) %>%
-  filter(str_starts(Month, paste0(chosen_year, "-", chosen_month))) %>%
+  filter(str_starts(Month, paste0(year_taken_SY, "-", month_taken_SY))) %>%
   left_join(LSOA_Pop, by = c("LSOA_code" = "LSOA_code")) %>%
-  filter(County == chosen_county) %>%
+  filter(County == county_taken_SY) %>%
   group_by(District) %>%
   summarise(
     VehicleCrimeCount = n(),
@@ -117,16 +117,16 @@ fmsb::radarchart(
 #------------------------ Pie Chart for Robbery Rate ---------------------------------#
 
 # Define parameters for month, year, and county
-chosen_county = "WEST YORKSHIRE"
-chosen_year = "2023"
-chosen_month = "08"
+county_taken_WY= "WEST YORKSHIRE"
+year_taken_WY = "2023"
+month_taken_WY = "08"
 
 # Filter and calculate robbery rate by district for selected date
 robbery_data = crime_data %>%
   filter(CrimeType == "Robbery") %>%
-  filter(str_starts(Month, paste0(chosen_year, "-", chosen_month))) %>%
+  filter(str_starts(Month, paste0(year_taken_WY, "-", month_taken_WY))) %>%
   left_join(LSOA_Pop, by = c("LSOA_code" = "LSOA_code")) %>%
-  filter(County == chosen_county) %>%
+  filter(County == county_taken_WY) %>%
   group_by(District) %>%
   summarise(
     RobberyCount = n(),
