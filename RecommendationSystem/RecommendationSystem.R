@@ -113,14 +113,21 @@ print(top_10_towns %>% select(County, District, Town, QualityScore))
 # Export the top 10 towns as a separate file
 write_csv(top_10_towns, "C:\\Users\\ADMIN\\Desktop\\Data Science Assignment\\Scripts\\RecommendationSystem\\Top_10_Towns.csv")
 
+#Assign Ratings To the Towns
+top_10_towns = top_10_towns %>%
+  mutate(Rating = round(QualityScore * 5, 1))  # Rating out of 5
+
 # Create a horizontal bar plot of the top 10 towns by score
-ggplot(top_10_towns, aes(x = TownLabel, y = QualityScore, fill = County)) +
+
+ggplot(top_10_towns, aes(x = TownLabel, y = Rating, fill = County)) +
   geom_col(show.legend = TRUE) +
   coord_flip() +
   labs(
-    title = "Top 10 Towns to Live In (Based on Affordability, Crime, Education, and Broadband)",
+    title = "Top 10 Towns to Live In",
+    subtitle = "Based on Affordability, Crime, Education, and Broadband",
     x = "Town (District)",
-    y = "Overall Quality Score"
+    y = "Rating [ 0-5 ]"
   ) +
   theme_minimal() +
-  scale_y_continuous(labels = scales::number_format(accuracy = 0.01))
+  scale_y_continuous(breaks = seq(0, 5, 0.5))
+
