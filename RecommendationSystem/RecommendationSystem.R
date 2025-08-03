@@ -29,11 +29,11 @@ broadband_summary = cleaned_broadband %>%
   group_by(County, District, Town) %>%
   summarise(AvgDownload = mean(avgDownload, na.rm = TRUE), .groups = "drop")
 
-# Count drug-related crimes per town
+
+# Count total crimes per town
 crime_summary = crime_enriched %>%
-  filter(CrimeType == "Drugs") %>%
   group_by(County, District, Town) %>%
-  summarise(DrugCount = n(), .groups = "drop")
+  summarise(TotalCrimeCount = n(), .groups = "drop")
 
 # Calculate average Attainment 8 scores for the most recent year available
 attainment_summary = attainment_data %>%
@@ -51,7 +51,7 @@ merged_all = house_prices_summary %>%
 norm_data = merged_all %>%
   mutate(
     norm_price = rescale(-AvgPrice),
-    norm_crime = rescale(-DrugCount),
+    norm_crime = rescale(-TotalCrimeCount),
     norm_attainment = rescale(AvgAttainment),
     norm_download = rescale(AvgDownload)
   ) %>%
@@ -71,6 +71,40 @@ top_10_towns = norm_data %>%
   slice(1:10) %>%
   mutate(TownLabel = paste0(Town, " (", District, ")")) %>%
   mutate(TownLabel = fct_reorder(TownLabel, QualityScore))
+
+
+# Top 10 towns with best internet speed
+cat("\nTop 10 Towns with Fastest Average Internet (Download Speed):\n")
+merged_all %>%
+  arrange(desc(AvgDownload)) %>%
+  slice(1:10) %>%
+  select(County, District, Town, AvgDownload) %>%
+  print()
+
+#Top 10 most affordable towns (lowest house price)
+cat("\nTop 10 Most Affordable Towns (Lowest Average House Prices):\n")
+merged_all %>%
+  arrange(AvgPrice) %>%
+  slice(1:10) %>%
+  select(County, District, Town, AvgPrice) %>%
+  print()
+
+#Top 10 most Safest towns
+cat("\nTop 10 Safest Towns (Lowest Total Crime Count):\n")
+merged_all %>%
+  arrange(TotalCrimeCount) %>%
+  slice(1:10) %>%
+  select(County, District, Town, TotalCrimeCount) %>%
+  print()
+
+
+# Top 10 towns with highest average attainment score
+cat("\nTop 10 Towns with Highest Average Attainment 8 Score:\n")
+merged_all %>%
+  arrange(desc(AvgAttainment)) %>%
+  slice(1:10) %>%
+  select(County, District, Town, AvgAttainment) %>%
+  print()
 
 # Show the top 10 towns in the console
 cat("Top 10 Towns to Live In (Overall Ranking):\n")

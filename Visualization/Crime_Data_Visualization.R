@@ -33,7 +33,7 @@ west_yorkshire = drug_crime_rates %>% filter(County == "WEST YORKSHIRE")
 
 # Boxplot for South Yorkshire
 ggplot(south_yorkshire, aes(x = District, y = DrugOffenseRate)) +
-  geom_boxplot(fill = "#1b7837", alpha = 0.7, outlier.color = "red") +
+  geom_boxplot(fill = "#00BFFF", alpha = 0.7, outlier.color = "red") +
   labs(
     title = "Drug Offense Rates by District in South Yorkshire (per 1,000 Residents)",
     x = "District", y = "Drug Offense Rate (per 1,000)"
@@ -44,7 +44,7 @@ ggplot(south_yorkshire, aes(x = District, y = DrugOffenseRate)) +
 
 # Boxplot for West Yorkshire
 ggplot(west_yorkshire, aes(x = District, y = DrugOffenseRate)) +
-  geom_boxplot(fill = "#762a83", alpha = 0.7, outlier.color = "red") +
+  geom_boxplot(fill = "#FF6F61", alpha = 0.7, outlier.color = "red") +
   labs(
     title = "Drug Offense Rates by District in West Yorkshire (per 1,000 Residents)",
     x = "District", y = "Drug Offense Rate (per 1,000)"
