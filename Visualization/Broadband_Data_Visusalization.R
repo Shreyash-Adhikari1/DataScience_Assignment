@@ -16,19 +16,37 @@ Broadband_Data = read_csv("C:\\Users\\ADMIN\\Desktop\\Data Science Assignment\\C
 Broadband_Data_filtered = Broadband_Data %>%
   filter(County %in% c("SOUTH YORKSHIRE", "WEST YORKSHIRE"))
 
-# Create a boxplot to compare average download speeds across districts, faceted by county
-ggplot(Broadband_Data_filtered, aes(x = reorder(District, avgDownload, median), y = avgDownload, fill = County)) +
-  geom_boxplot(outlier.color = "red", alpha = 0.7) +  # Boxplot with red outliers
-  facet_wrap(~County, scales = "free_x") +            # Create separate plots for each county
+south_yorkshire_Broadband=Broadband_Data_filtered %>% filter(County == "SOUTH YORKSHIRE")
+west_yorkshire_Broadband=Broadband_Data_filtered %>% filter(County == "WEST YORKSHIRE")
+  
+# Create a boxplot to compare average download speeds across districtsy, faceted by count
+
+# South Yorkshire Box plot
+
+ggplot(south_yorkshire_Broadband, aes(x = reorder(District, avgDownload, median), y = avgDownload, fill = County)) +
+  geom_boxplot(fill="#00BFFF", outlier.color = "red", alpha = 0.7) +  # Boxplot with red outliers
   labs(
-    title = "Average Download Speeds Across Districts by County",
-    subtitle = "Comparison of Median Download Speeds by District in South Yorkshire and West Yorkshire",
+    title = "Average Download Speeds Across Districts by County [South Yorkshire]",
+    subtitle = "Comparison of Median Download Speeds by District in South Yorkshire",
     x = "District (ordered by median download speed)",
     y = "Average Download Speed (Mbps)"
   ) +
   theme_minimal(base_size = 13) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +  # Rotate x-axis labels for readability
-  scale_fill_manual(values = c("SOUTH YORKSHIRE" = "#00BFFF", "WEST YORKSHIRE" = "#FF6F61"))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  
+
+# West Yorkshire Box plot
+ggplot(west_yorkshire_Broadband, aes(x = reorder(District, avgDownload, median), y = avgDownload, fill = County)) +
+  geom_boxplot(fill="#FF6F61", outlier.color = "black", alpha = 0.7) +  # Boxplot with red outliers
+  labs(
+    title = "Average Download Speeds Across Districts by County [West Yorkshire]",
+    subtitle = "Comparison of Median Download Speeds by District inWest Yorkshire",
+    x = "District (ordered by median download speed)",
+    y = "Average Download Speed (Mbps)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  
 
 #---------------------------------  Bar Charts for Town vs Average Download Speed ---------------------#
 

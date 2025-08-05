@@ -76,7 +76,6 @@ custom_colors = scales::hue_pal()(length(unique(attainment_trend$Label)))
 ggplot(attainment_trend, aes(x = Year, y = ATT8SCR, group = Label, color = Label)) +
   stat_summary(fun = mean, geom = "line", linewidth = 1.1) +
   stat_summary(fun = mean, geom = "point", size = 2.5) +
-  facet_wrap(~ County, scales = "free_x") +
   labs(
     title = "Attainment 8 Score Trends by District (2021–2024)",
     subtitle = "Average Performance Across South and West Yorkshire Districts",
